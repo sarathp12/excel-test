@@ -13,3 +13,14 @@ worksheet.cell_value(0, 0)
 for i in range(worksheet.nrows):
     print(worksheet.cell_value(i, 5))
     print(worksheet.cell_value(i, 6))
+
+# assign the excel values to variables
+worksheet.cell_value(0, 0)
+for i in range(worksheet.nrows):
+    x = worksheet.cell_value(i, 5)
+    print(x)
+    y = worksheet.cell_value(i, 6)
+    print(y)
+    
+
+
