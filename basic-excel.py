@@ -21,6 +21,8 @@ for i in range(worksheet.nrows):
     print(x)
     y = worksheet.cell_value(i, 6)
     print(y)
-    
+# convert float value to integer
+    z = int(float(y))
+    print(z)
 
 
