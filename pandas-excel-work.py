@@ -39,10 +39,14 @@ for index, row in df1.iterrows():
      ports_list = ports.split(",")
      for port in ports_list:
 # nmap execution with subprocess
-         cmdstr = "nmap -Pn -p" + " ".join(port) + " " + i
+         cmdstr = "nmap -Pn -p " + port + " " + i
+         print(cmdstr)
          args = shlex.split(cmdstr)
          proc = subprocess.Popen(args,stdout=subprocess.PIPE, shell=True)
-         (output, err) = proc.communicate()
-         proc_status = proc.wait()
-         print("Command output : ", output)
-         print("command exit status/return code : ", proc_status)
+         while True:
+             out = proc.stderr.read(1)
+             if out == '' and proc.poll() != None:
+                 break
+             if out != '':
+                 sys.stdout.write(out)
+                 sys.stdout.flush()
