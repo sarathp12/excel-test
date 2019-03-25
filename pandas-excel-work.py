@@ -5,6 +5,7 @@ import os
 import sys
 import subprocess
 import shlex
+import nmap
 
 excel_file = 'test-py.xlsx'
 ip_data = pd.read_excel(excel_file)
@@ -38,15 +39,6 @@ for index, row in df1.iterrows():
 # make the ports into sub-list
      ports_list = ports.split(",")
      for port in ports_list:
-# nmap execution with subprocess
-         cmdstr = "nmap -Pn -p " + port + " " + i
-         print(cmdstr)
-         args = shlex.split(cmdstr)
-         proc = subprocess.Popen(args,stdout=subprocess.PIPE, shell=True)
-         while True:
-             out = proc.stderr.read(1)
-             if out == '' and proc.poll() != None:
-                 break
-             if out != '':
-                 sys.stdout.write(out)
-                 sys.stdout.flush()
+         nm = nmap.PortScanner()
+         nm_results = scanner.scan(hosts=i,ports=port,arguments="-Pn")
+         print(nm_results)
