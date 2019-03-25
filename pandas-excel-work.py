@@ -40,5 +40,5 @@ for index, row in df1.iterrows():
      ports_list = ports.split(",")
      for port in ports_list:
          nm = nmap.PortScanner()
-         nm_results = scanner.scan(hosts=i,ports=port,arguments="-Pn")
-         print(nm_results)
+         nm_results = nm.scan(hosts=i,ports=port,arguments='-Pn')
+         print(nm_results) 
