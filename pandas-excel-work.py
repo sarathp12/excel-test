@@ -24,7 +24,6 @@ df1 = df[df.columns[5:7]].dropna()
 df1.columns = ['ip','ports']
 print(df1)
 
-cmdstr = "nmap -Pn -p" + " ".join(port) + " " + i
 # try the loop
 for index, row in df1.iterrows():
      print("IP And Ports")
