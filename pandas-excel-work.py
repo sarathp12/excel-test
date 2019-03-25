@@ -29,3 +29,9 @@ for index, row in df1.iterrows():
      ports = str(row['ports'])
      print(i)
      print(ports)
+     if ports is None:
+         continue
+# make the ports into sub-list
+     ports_list = ports.split(",")
+     for port in ports_list:
+         print("nmap -Pn -p",' ',port,i)
