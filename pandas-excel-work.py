@@ -7,12 +7,17 @@ import subprocess
 import shlex
 import nmap
 
-excel_file = 'test-py.xlsx'
+# get excel name dynamically
+excel_file = sys.argv[1]
+# excel_file = 'test-py.xlsx'
+print(excel_file)
 ip_data = pd.read_excel(excel_file)
 
 # printing the first few lines
 x = ip_data.head()
 print(x)
+# make the list of subnets
+az_ip_list = ['10.244.159.0/27', '10.244.159.32/27', '10.244.152.0/22', '10.244.208.0/24']
 
 # print the excel sheets
 ip_data_sheet1 = pd.read_excel(excel_file, sheetname=0, index_col=0)
