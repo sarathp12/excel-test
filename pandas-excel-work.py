@@ -19,3 +19,13 @@ df = pd.read_excel('test-py.xlsx')
 df1 = df[df.columns[5:7]].dropna()
 df1.columns = ['ip','ports']
 print(df1)
+
+# try the loop
+for index, row in df1.iterrows():
+     print("IP And Ports")
+     print(row['ip'], row['ports'])
+# assign the ips and ports to variables
+     i = row['ip']
+     ports = str(row['ports'])
+     print(i)
+     print(ports)
