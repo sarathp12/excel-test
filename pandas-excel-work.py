@@ -41,4 +41,9 @@ for index, row in df1.iterrows():
      for port in ports_list:
          nm = nmap.PortScanner()
          nm_results = nm.scan(hosts=i,ports=port,arguments='-Pn')
-         print(nm_results) 
+         print(nm.command_line())
+         for proto in nm[i].all_protocols():
+             lport = nm[i][proto].keys()
+             for port in lport:
+                 print ('port : {}\tstate : {}'.format(port, nm[i][proto][port]['state']))
+         
