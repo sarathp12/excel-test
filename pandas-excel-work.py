@@ -1,6 +1,8 @@
 #! /usr/bin/python
 
 import pandas as pd
+import os
+import string
 
 excel_file = 'test-py.xlsx'
 ip_data = pd.read_excel(excel_file)
@@ -34,4 +36,9 @@ for index, row in df1.iterrows():
 # make the ports into sub-list
      ports_list = ports.split(",")
      for port in ports_list:
+# strip the spaces from the variable
+         port = port.translate({ord(c): None for c in string.whitespace})
+         print(port)
          print("nmap -Pn -p",' ',port,i)
+# execute shell command
+         os.system('nmap -Pn -p port i')
