@@ -2,7 +2,9 @@
 
 import pandas as pd
 import os
-import string
+import sys
+import subprocess
+import shlex
 
 excel_file = 'test-py.xlsx'
 ip_data = pd.read_excel(excel_file)
@@ -22,6 +24,7 @@ df1 = df[df.columns[5:7]].dropna()
 df1.columns = ['ip','ports']
 print(df1)
 
+cmdstr = "nmap -Pn -p" + " ".join(port) + " " + i
 # try the loop
 for index, row in df1.iterrows():
      print("IP And Ports")
@@ -36,9 +39,11 @@ for index, row in df1.iterrows():
 # make the ports into sub-list
      ports_list = ports.split(",")
      for port in ports_list:
-# strip the spaces from the variable
-         port = port.translate({ord(c): None for c in string.whitespace})
-         print(port)
-         print("nmap -Pn -p",' ',port,i)
-# execute shell command
-         os.system('nmap -Pn -p port i')
+# nmap execution with subprocess
+         cmdstr = "nmap -Pn -p" + " ".join(port) + " " + i
+         args = shlex.split(cmdstr)
+         proc = subprocess.Popen(args,stdout=subprocess.PIPE, shell=True)
+         (output, err) = proc.communicate()
+         proc_status = proc.wait()
+         print("Command output : ", output)
+         print("command exit status/return code : ", proc_status)
